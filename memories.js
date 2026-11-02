@@ -40,7 +40,7 @@ const memories = [
   { photo: "photos/28.png", letter: "syempre with jonjon" },
   { photo: "photos/29.png", letter: "with baby jay" },
   { photo: "photos/30.png", letter: "jabi cabiao after inasal kase umuulan HAHHA" },
-  { photo: "photos/31 .png", letter: "Best PIC" },
+  { photo: "photos/31.png", letter: "Best PIC" },
   { photo: "photos/32.png", letter: "Mantama gala " },
   { photo: "photos/33.jpg", letter: "Gandaa" },
   { photo: "photos/34.jpg", letter: "HAHHA solo at the balcony" },
