@@ -6,7 +6,7 @@ const config = {
   music: ["music/song1.mp3", "music/song2.mp3"],   // plays in order, then repeats. Use [] for no music
   finalMessage: "That was all 36 of our memories.\nI love you.",
   finalQuestion: "Will you spend more years with me?",   // set to "" to skip
-  yesMessage: "Here's to many more years together 💖"
+  yesMessage: "Happy anniversary, love!  Thank you for everything. Here's to more years together and more memories to make. Iloveyou"
 };
 
 const memories = [
