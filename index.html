@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>36 Tulips, 36 Memories</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="intro" class="intro">
+    <div id="introBox" class="intro-box">
+      <h2 id="introText"></h2>
+      <div id="gateWrap" hidden><p id="gateQ"></p><input id="gateIn" autocomplete="off"><p id="gateHint" class="hint"></p></div>
+      <button class="btn" id="start">Open 🌷</button>
+    </div>
+  </div>
+  <button id="mute" class="mute" hidden>🔊</button>
+  <header>
+    <h1>36 Tulips, 36 Memories</h1>
+    <p class="sub">Tap a tulip to open a memory.</p>
+    <p id="count" class="count"></p>
+  </header>
+
+  <main>
+    <svg id="bouquet" viewBox="0 0 100 135" aria-label="Bouquet of 36 tulips">
+      <defs>
+        <linearGradient id="leaf" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#2d6e3c"/>
+          <stop offset="1" stop-color="#6bb36f"/>
+        </linearGradient>
+        <linearGradient id="shadeSide" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#000" stop-opacity=".22"/>
+          <stop offset=".5" stop-color="#000" stop-opacity="0"/>
+          <stop offset="1" stop-color="#000" stop-opacity=".3"/>
+        </linearGradient>
+        <linearGradient id="shadeTop" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#fff" stop-opacity=".22"/>
+          <stop offset=".6" stop-color="#fff" stop-opacity="0"/>
+          <stop offset="1" stop-color="#000" stop-opacity=".18"/>
+        </linearGradient>
+        <linearGradient id="paperBack" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#fbeed9"/>
+          <stop offset="1" stop-color="#ecd0b0"/>
+        </linearGradient>
+        <linearGradient id="paperFront" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#fffaf0"/>
+          <stop offset=".5" stop-color="#f8e6cf"/>
+          <stop offset="1" stop-color="#efd5b8"/>
+        </linearGradient>
+        <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+          <feDropShadow dx="0" dy=".6" stdDeviation=".7" flood-color="#4a2a10" flood-opacity=".4"/>
+        </filter>
+
+        <!-- Tulip template: script.js makes one coloured copy per palette -->
+        <symbol id="tulip-template" viewBox="-10 -14 20 26" overflow="visible">
+          <path style="fill:var(--b)" stroke="rgba(0,0,0,.2)" stroke-width=".3"
+                d="M-5 -2 C-6 -8 -3 -11 0 -12.5 C3 -11 6 -8 5 -2 C4 5 2 8 0 9 C-2 8 -4 5 -5 -2Z"/>
+          <path style="fill:var(--a)" stroke="rgba(0,0,0,.22)" stroke-width=".3"
+                d="M-7 -5 C-7.5 -9 -5 -11 -3 -12.2 C-2 -8 -1 -3 0 9.3 C-3 8 -6.5 4 -7 -5Z"/>
+          <path style="fill:var(--a)" stroke="rgba(0,0,0,.22)" stroke-width=".3"
+                d="M7 -5 C7.5 -9 5 -11 3 -12.2 C2 -8 1 -3 0 9.3 C3 8 6.5 4 7 -5Z"/>
+          <path style="fill:var(--c)" stroke="rgba(0,0,0,.2)" stroke-width=".3"
+                d="M-4.2 -3 C-4.5 -8 -2 -11.5 0 -13.2 C2 -11.5 4.5 -8 4.2 -3 C3.8 4 1.8 8 0 9.6 C-1.8 8 -4 4 -4.2 -3Z"/>
+          <!-- soft shading over the whole head -->
+          <path fill="url(#shadeSide)"
+                d="M-7 -5 C-7.5 -9 -5 -11 -3 -12.2 C-1.5 -13 -.8 -13.2 0 -13.2 C.8 -13.2 1.5 -13 3 -12.2 C5 -11 7.5 -9 7 -5 C6.5 4 3 8 0 9.6 C-3 8 -6.5 4 -7 -5Z"/>
+          <path fill="url(#shadeTop)"
+                d="M-7 -5 C-7.5 -9 -5 -11 -3 -12.2 C-1.5 -13 -.8 -13.2 0 -13.2 C.8 -13.2 1.5 -13 3 -12.2 C5 -11 7.5 -9 7 -5 C6.5 4 3 8 0 9.6 C-3 8 -6.5 4 -7 -5Z"/>
+          <!-- petal veins + highlight -->
+          <path d="M0 -11 C-.6 -4 -.4 3 0 8" fill="none" stroke="#fff" stroke-opacity=".28" stroke-width=".35"/>
+          <path d="M-2.2 -9 C-2.6 -4 -2.4 1 -1.6 6" fill="none" stroke="#000" stroke-opacity=".12" stroke-width=".3"/>
+          <path d="M2.2 -9 C2.6 -4 2.4 1 1.6 6" fill="none" stroke="#000" stroke-opacity=".12" stroke-width=".3"/>
+          <ellipse cx="-2.2" cy="-6.5" rx="1" ry="2.6" fill="#fff" opacity=".22" transform="rotate(8 -2.2 -6.5)"/>
+          <!-- calyx -->
+          <path d="M-1.4 9 L1.4 9 L.9 11.6 L-.9 11.6Z" fill="#3d8a4a"/>
+        </symbol>
+      </defs>
+
+      <g id="leaves"></g>
+      <g id="stems"></g>
+
+      <!-- wrapping paper + ribbon bow -->
+      <g id="wrap">
+        <path d="M20 66 Q50 82 80 66 L56 128 Q50 132 44 128 Z" fill="url(#paperBack)" filter="url(#shadow)"/>
+        <path d="M27 72 Q50 88 73 72 L54 126 Q50 129 46 126 Z" fill="url(#paperFront)"/>
+        <path d="M50 86 L50 128" stroke="#cfa982" stroke-width=".3" opacity=".6"/>
+        <path d="M38 83 L47 120 M62 83 L53 120" stroke="#cfa982" stroke-width=".25" opacity=".5"/>
+        <path d="M37 93 Q50 99 63 93 L62 98 Q50 104 38 98 Z" fill="#d9567f"/>
+        <path d="M50 97 C40 88 34 96 41 102 C45 105 49 101 50 97Z" fill="#e8708f"/>
+        <path d="M50 97 C60 88 66 96 59 102 C55 105 51 101 50 97Z" fill="#e8708f"/>
+        <path d="M50 99 L43 114 L47 111 L50 117Z" fill="#c2406a"/>
+        <path d="M50 99 L57 114 L53 111 L50 117Z" fill="#cc4872"/>
+        <circle cx="50" cy="98" r="2.2" fill="#f08aa6"/>
+      </g>
+
+      <g id="tulips"></g>
+    </svg>
+  </main>
+  <div id="ending" class="ending" hidden>
+    <p id="final" class="final"></p>
+    <div id="ask" hidden><p id="askText"></p><button class="btn" id="yes">Yes 💖</button><button class="btn ghost" id="no">No</button></div>
+  </div>
+
+  <div id="modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="title">
+    <div class="letter-card">
+      <figure class="polaroid">
+        <img id="photo" alt="">
+        <figcaption id="caption"></figcaption>
+      </figure>
+      <p id="date" class="date"></p>
+      <h2 id="title"></h2>
+      <p id="letter" class="letter"></p>
+      <div id="extra"></div>
+      <div class="nav">
+        <button class="btn" id="close">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="memories.js"></script>
+  <script src="effects.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
